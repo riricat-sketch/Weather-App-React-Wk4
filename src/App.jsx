@@ -87,19 +87,19 @@ export default function App() {
           </p>
         </div>
       )}
+      <footer style={{ marginTop: "40px", fontSize: "14px" }}>
+        <p>
+          View this project on{' '}
+          <a
+            href="https://github.com/riricat-sketch/Weather-App-React-Wk4"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#0366d6", textDecoration: "none" }}
+          >
+            GitHub
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
-<footer style={{ marginTop: "40px", fontSize: "14px" }}>
-  <p>
-    View this project on{" "}
-    <a
-      href="https://github.com/riricat-sketch/Weather-App-React-Wk4"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{ color: "#0366d6", textDecoration: "none" }}
-    >
-      GitHub
-    </a>
-  </p>
-</footer>;
