@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import SearchForm from "./components/SearchForm";
+import WeatherResult from "./components/WeatherResult";
+import Footer from "./components/Footer";
 import "./App.css";
 
 export default function App() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState("");
+  const [unit, setUnit] = useState("celsius");
 
   const apiKey = "fe1483f743b581b5520a1b725af03a49";
-
-  const handleCityChange = (event) => {
-    setCity(event.target.value);
-  };
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -31,75 +31,24 @@ export default function App() {
       });
   };
 
-  const getWeatherEmoji = (weatherMain) => {
-    switch (weatherMain.toLowerCase()) {
-      case "clear":
-        return "☀️";
-      case "clouds":
-        return "☁️";
-      case "rain":
-        return "🌧️";
-      case "snow":
-        return "❄️";
-      case "thunderstorm":
-        return "⛈️";
-      case "drizzle":
-        return "🌦️";
-      case "mist":
-      case "fog":
-        return "🌫️";
-      default:
-        return "🌡️";
-    }
-  };
-
   return (
     <div className="App">
       <h1>Weather Search Engine</h1>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={city}
-          onChange={handleCityChange}
-          placeholder="Enter city"
-        />
-        <button type="submit">Search</button>
-      </form>
+
+      <SearchForm city={city} setCity={setCity} onSearch={handleSearch} />
 
       {error && <p className="error">{error}</p>}
 
       {weatherData && (
-        <div className="weather-result">
-          <h2>
-            {city} {getWeatherEmoji(weatherData.weather[0].main)}
-          </h2>
-          <p>
-            <strong>Temperature:</strong> {weatherData.main.temp}°C
-          </p>
-          <p>
-            <strong>Description:</strong> {weatherData.weather[0].description}
-          </p>
-          <p>
-            <strong>Humidity:</strong> {weatherData.main.humidity}%
-          </p>
-          <p>
-            <strong>Wind speed:</strong> {weatherData.wind.speed} m/s
-          </p>
-        </div>
+        <WeatherResult
+          city={city}
+          weatherData={weatherData}
+          unit={unit}
+          setUnit={setUnit}
+        />
       )}
-      <footer style={{ marginTop: "40px", fontSize: "14px" }}>
-        <p>
-          View this project on{' '}
-          <a
-            href="https://github.com/riricat-sketch/Weather-App-React-Wk4"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "#0366d6", textDecoration: "none" }}
-          >
-            GitHub
-          </a>
-        </p>
-      </footer>
+
+      <Footer />
     </div>
   );
 }
