@@ -31,7 +31,10 @@ export default function WeatherResult({ city, weatherData, unit, setUnit }) {
   return (
     <div className="weather-result">
       <h2>
-        {city} {getWeatherEmoji(weatherData.weather[0].main)}
+        {city}{" "}
+        <span className="weather-emoji">
+          {getWeatherEmoji(weatherData.weather[0].main)}
+        </span>
       </h2>
 
       <div className="unit-toggle">

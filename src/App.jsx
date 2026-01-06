@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import SearchForm from "./components/SearchForm";
 import WeatherResult from "./components/WeatherResult";
+import Forecast from "./components/Forecast";
 import Footer from "./components/Footer";
 import "./App.css";
 
@@ -11,7 +12,7 @@ export default function App() {
   const [error, setError] = useState("");
   const [unit, setUnit] = useState("celsius");
 
-  const apiKey = "fe1483f743b581b5520a1b725af03a49";
+  const apiKey = "bd3bb6534458ba51b48c49f5155745b6";
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -38,14 +39,17 @@ export default function App() {
       <SearchForm city={city} setCity={setCity} onSearch={handleSearch} />
 
       {error && <p className="error">{error}</p>}
-
       {weatherData && (
-        <WeatherResult
-          city={city}
-          weatherData={weatherData}
-          unit={unit}
-          setUnit={setUnit}
-        />
+        <>
+          <WeatherResult
+            city={city}
+            weatherData={weatherData}
+            unit={unit}
+            setUnit={setUnit}
+          />
+
+          <Forecast city={city} unit={unit} apiKey={apiKey} />
+        </>
       )}
 
       <Footer />
